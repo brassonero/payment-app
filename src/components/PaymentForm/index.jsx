@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {CreditCard, Check, MessageCircle} from 'lucide-react';
 import {loadStripe} from '@stripe/stripe-js';
 
-// Stripe publishable key
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51QeiWQQL0OOvl0KQAw1j5Zr3nMhjtucDb2a7jYfStu32V1L4P2AwpIDDwBnrDmG1i9WtH9kt3DIA5GZ8XrzRo2jR00l553LfDe';
-
 const PackageCard = ({pkg, selected, onSelect}) => (
     <div
         onClick={() => onSelect(pkg)}
@@ -120,7 +117,7 @@ const PaymentForm = () => {
                 cardElement.mount('#card-element');
                 setCard(cardElement);
                 setStripe(stripeInstance);
-                setError(null); // Clear any previous errors
+                setError(null);
             } catch (err) {
                 console.error('Stripe initialization error:', err);
                 setError('Failed to load payment system. Please try again later.');
@@ -153,7 +150,7 @@ const PaymentForm = () => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     stripeToken: token.id,
-                    amount: Math.round(selectedPackage.cost * 100) // Convert to cents
+                    amount: Math.round(selectedPackage.cost * 100)
                 })
             });
 
