@@ -145,7 +145,7 @@ const PaymentForm = () => {
             const {token, error: stripeError} = await stripe.createToken(card);
             if (stripeError) throw new Error(stripeError.message);
 
-            const response = await fetch('http://localhost:8080/api/payments', {
+            const response = await fetch('http://localhost:8080/v1/payments', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
